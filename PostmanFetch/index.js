@@ -1,11 +1,26 @@
 import axios from 'axios';
+import { strings } from '../config';
 
 export default class PostmanFetch {
 
   constructor(json, config) {
     this.json = json;
     this.variables = config.variables;
+    this.debug = config.debug;
   }
+
+  setVariables = newVariables => {
+    this.variables = {
+      ...this.variables,
+      ...newVariables
+    };
+  };
+
+  showDebugMessage = (mode, message) => {
+    if (this.debug) {
+      console[mode](message);
+    }
+  };
 
   findRequestFromKey = key => {
     const keys = key.split('.');
@@ -29,20 +44,13 @@ export default class PostmanFetch {
     if (foundRequest) {
       return foundRequest;
     } else {
-      console.debug('There is no request with the given key!!!');
+      this.showDebugMessage('debug', strings.noRequestFound);
     }
-  };
-
-  setVariables = newVariables => {
-    this.variables = {
-      ...this.variables,
-      ...newVariables
-    };
   };
 
   fetch = key => {
     //axios
     const foundRequest = this.findRequestFromKey(key);
-    console.log(foundRequest, '<== found Request');
+    this.showDebugMessage('log', `${foundRequest} ${strings.foundRequest}`);
   }
 };
