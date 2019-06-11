@@ -90,6 +90,9 @@
         },
         {
           "name": "Get Profile",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [
@@ -100,6 +103,12 @@
               {
                 "key": "Authorization",
                 "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
               }
             ],
             "body": {
@@ -107,13 +116,27 @@
               "raw": ""
             },
             "url": {
-              "raw": "{{url}}/users/profile",
+              "raw": "{{url}}/users/profile?per_page=10&page=2&sort=-createdAt",
               "host": [
                 "{{url}}"
               ],
               "path": [
                 "users",
                 "profile"
+              ],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt"
+                }
               ]
             }
           },
@@ -139,7 +162,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n\t\"name\" : \"رضا رضایی\",\n\t\"cart_number\" : \"6037991185340043\",\n\t\"birth_date\" : \"1373/11/28\",\n\t\"favorite_color\" : \"#fffff\"\n}"
+              "raw": "{\n    \"name\": \"رضا رضایی\",\n    \"cart_number\": \"6037991185340043\",\n    \"birth_date\": \"1373/11/28\",\n    \"favorite_color\": \"#fffff\"\n}"
             },
             "url": {
               "raw": "{{url}}/users/profile",

@@ -58,42 +58,57 @@ export default class PostmanFetch {
     return value;
   };
 
-  generateHeaders = request => {
-    const headers = request.header;
-    const generatedHeaders = {};
-    headers.forEach(header => {
-      generatedHeaders[header.key] = this.replaceVariablesInString(header.value);
+  generateObjects = (items = [], itemName) => {
+    const generatedItems = {};
+    items.forEach(item => {
+      generatedItems[item.key] = this.replaceVariablesInString(item.value);
     });
-    this.showDebugMessage('log', `${JSON.stringify(generatedHeaders)} ${strings.generatedHeaders}`);
-    return headers;
+    this.showDebugMessage('log', strings.generatedItems(generatedItems, itemName));
+    return generatedItems;
   };
 
-  validateBodyParams = (requestBodyParams, fetchBodyParams, validate) => {
+  validateParams = (requestParams = [], fetchParams = {}, validate) => {
     if (validate) {
-      const collectionBody = JSON.parse(requestBodyParams[requestBodyParams.mode]);
-      const collectionOverBody = Object.keys(collectionBody).map(collectionKey =>
-        fetchBodyParams.hasOwnProperty(collectionKey)
-      );
-      const bodyOverCollection = Object.keys(fetchBodyParams).map(collectionKey =>
-        collectionBody.hasOwnProperty(collectionKey)
-      );
-      const isBodyParamsValid = ![...collectionOverBody, ...bodyOverCollection].includes(false);
-      if (!isBodyParamsValid) {
-        this.showDebugMessage('warn', strings.invalidBodyParams(fetchBodyParams, collectionBody));
+      let collectionParams = requestParams;
+      if (requestParams[requestParams.mode]) {
+        collectionParams = JSON.parse(requestParams[requestParams.mode]);
       }
-      return isBodyParamsValid;
+      const collectionOverParams = Object.keys(collectionParams).map(collectionKey =>
+        fetchParams.hasOwnProperty(collectionKey)
+      );
+      const paramOverCollection = Object.keys(fetchParams).map(collectionKey =>
+        collectionParams.hasOwnProperty(collectionKey)
+      );
+      const isParamsValid = ![...collectionOverParams, ...paramOverCollection].includes(false);
+      if (!isParamsValid) {
+        this.showDebugMessage('warn', strings.invalidBodyParams(fetchParams, collectionParams));
+      }
+      return isParamsValid;
     }
     return true;
   };
 
-  fetch = (key, { body = {}, validate = false, ...restConfig }) => {
-    //axios
+  fetch = (key, { body = {}, validateQueryParams = false, validateBodyParams = false, queryParams = {}, ...restConfig }) => {
     const foundRequest = this.findRequestFromKey(key);
     if (foundRequest) {
       this.showDebugMessage('log', `${JSON.stringify(foundRequest)} ${strings.foundRequest}`);
-      const headers = this.generateHeaders(foundRequest);
-      const isBodyParamsValid = this.validateBodyParams(foundRequest.body, body, validate);
+      const headers = this.generateObjects(foundRequest.header, 'headers');
+      const isBodyParamsValid = this.validateParams(foundRequest.body, body, validateBodyParams);
+      const isQueryParamsValid = this.validateParams(
+        this.generateObjects(foundRequest.url.query, 'queryParams'),
+        queryParams,
+        validateQueryParams
+      );
+      console.log(isBodyParamsValid, 'body');
+      console.log(isQueryParamsValid, 'query');
+      const url = this.urlGenerator(foundRequest);
     }
+  };
+
+  urlGenerator = request => {
+    const host = this.replaceVariablesInString(request.url.host[0]);
+    const path = request.url.path.join('/');
+    return `${host}/${path}`;
   }
 
 };
