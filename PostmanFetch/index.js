@@ -7,7 +7,6 @@ export default class PostmanFetch {
     this.json = json;
     this.variables = config.variables;
     this.debug = config.debug;
-    this.validate = config.validate;
   }
 
   setVariables = newVariables => {
@@ -19,7 +18,7 @@ export default class PostmanFetch {
 
   showDebugMessage = (mode, message) => {
     if (this.debug) {
-      console[mode](message);
+      console[mode](`\n ==> ${message} <== \n`);
     }
   };
 
@@ -65,16 +64,36 @@ export default class PostmanFetch {
     headers.forEach(header => {
       generatedHeaders[header.key] = this.replaceVariablesInString(header.value);
     });
-    this.showDebugMessage('log', `${JSON.stringify(generatedHeaders)} <== generated request`);
+    this.showDebugMessage('log', `${JSON.stringify(generatedHeaders)} ${strings.generatedHeaders}`);
     return headers;
   };
 
-  fetch = key => {
+  validateBodyParams = (requestBodyParams, fetchBodyParams, validate) => {
+    if (validate) {
+      const collectionBody = JSON.parse(requestBodyParams[requestBodyParams.mode]);
+      const collectionOverBody = Object.keys(collectionBody).map(collectionKey =>
+        fetchBodyParams.hasOwnProperty(collectionKey)
+      );
+      const bodyOverCollection = Object.keys(fetchBodyParams).map(collectionKey =>
+        collectionBody.hasOwnProperty(collectionKey)
+      );
+      const isBodyParamsValid = ![...collectionOverBody, ...bodyOverCollection].includes(false);
+      if (!isBodyParamsValid) {
+        this.showDebugMessage('warn', strings.invalidBodyParams(fetchBodyParams, collectionBody));
+      }
+      return isBodyParamsValid;
+    }
+    return true;
+  };
+
+  fetch = (key, { body = {}, validate = false, ...restConfig }) => {
     //axios
     const foundRequest = this.findRequestFromKey(key);
     if (foundRequest) {
       this.showDebugMessage('log', `${JSON.stringify(foundRequest)} ${strings.foundRequest}`);
       const headers = this.generateHeaders(foundRequest);
+      const isBodyParamsValid = this.validateBodyParams(foundRequest.body, body, validate);
     }
   }
+
 };
