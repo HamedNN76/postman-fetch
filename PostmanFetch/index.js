@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 export default class PostmanFetch {
-  constructor(json) {
+
+  constructor(json, config) {
     this.json = json;
+    this.variables = config.variables;
   }
 
   findRequestFromKey = key => {
     const keys = key.split('.');
-    const findRequest = (items, key) => {
-      return items.find(item => item.name === key);
-    };
+    const findRequest = (items, key) => items.find(item => item.name === key);
     let foundRequest;
     let startedPoint = this.json.item;
     for (let i = 0; i < keys.length; i++) {
@@ -31,6 +31,13 @@ export default class PostmanFetch {
     } else {
       console.debug('There is no request with the given key!!!');
     }
+  };
+
+  setVariables = newVariables => {
+    this.variables = {
+      ...this.variables,
+      ...newVariables
+    };
   };
 
   fetch = key => {

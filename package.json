@@ -1,7 +1,7 @@
 {
   "name": "postman-fetch",
   "version": "1.0.0",
-  "description": "",
+  "description": "A package for fetch from your postman collection easily with name of your request",
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec \"babel-node index.js\"",
