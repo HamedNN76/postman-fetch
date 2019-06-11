@@ -7,6 +7,7 @@ export default class PostmanFetch {
     this.json = json;
     this.variables = config.variables;
     this.debug = config.debug;
+    this.validate = config.validate;
   }
 
   setVariables = newVariables => {
@@ -48,9 +49,32 @@ export default class PostmanFetch {
     }
   };
 
+  replaceVariablesInString = value => {
+    const regex = /\{{(.*)\}}/;
+    if (regex.test(value)) {
+      let property = value.match(regex).pop();
+      const variable = this.variables[property];
+      return value.replace(regex, variable)
+    }
+    return value;
+  };
+
+  generateHeaders = request => {
+    const headers = request.header;
+    const generatedHeaders = {};
+    headers.forEach(header => {
+      generatedHeaders[header.key] = this.replaceVariablesInString(header.value);
+    });
+    this.showDebugMessage('log', `${JSON.stringify(generatedHeaders)} <== generated request`);
+    return headers;
+  };
+
   fetch = key => {
     //axios
     const foundRequest = this.findRequestFromKey(key);
-    this.showDebugMessage('log', `${foundRequest} ${strings.foundRequest}`);
+    if (foundRequest) {
+      this.showDebugMessage('log', `${JSON.stringify(foundRequest)} ${strings.foundRequest}`);
+      const headers = this.generateHeaders(foundRequest);
+    }
   }
 };
