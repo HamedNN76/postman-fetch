@@ -48,11 +48,11 @@
               "listen": "test",
               "script": {
                 "id": "7ba1453e-28dc-4ad3-9e08-1c1a9b3d0070",
-                "type": "text/javascript",
                 "exec": [
                   "var jsonData = JSON.parse(responseBody);",
                   "postman.setEnvironmentVariable(\"token\", jsonData.token);"
-                ]
+                ],
+                "type": "text/javascript"
               }
             }
           ],
@@ -145,6 +145,16 @@
         {
           "name": "Update Profile",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{$guid}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "PUT",
             "header": [
               {
@@ -161,8 +171,14 @@
               }
             ],
             "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"رضا رضایی\",\n    \"cart_number\": \"6037991185340043\",\n    \"birth_date\": \"1373/11/28\",\n    \"favorite_color\": \"#fffff\"\n}"
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "chiz",
+                  "value": "this is zadan",
+                  "type": "text"
+                }
+              ]
             },
             "url": {
               "raw": "{{url}}/users/profile",
