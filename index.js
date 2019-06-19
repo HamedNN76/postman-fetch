@@ -9,9 +9,6 @@ const { fetch } = new PostmanFetch(sampleJSON, {
   debug: true
 });
 
-fetch('User.Update Profile', {
-  body: { name: '', cart_number: 2, birth_date: '3', favorite_color: 'sa' },
-  // queryParams: { per_page: '10', page: '7', sort: '' }
-});
+fetch('Todo.List todos');
 
 export default PostmanFetch;

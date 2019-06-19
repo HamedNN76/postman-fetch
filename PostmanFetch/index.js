@@ -95,7 +95,7 @@ export default class PostmanFetch {
 
       const headers = this.generateObjects(foundRequest.header, 'headers');
       const url = this.urlGenerator(foundRequest);
-      const options = {
+      let options = {
         url,
         method: foundRequest.method,
         headers,
@@ -104,6 +104,17 @@ export default class PostmanFetch {
         ...restConfig
       };
       this.showDebugMessage('log', strings.logRequestOptions(options));
+
+      if (options.type === 'formdata') {
+        options.data = new FormData();
+
+        for (let key in data) {
+          if (typeof key === 'string' && data.hasOwnProperty(key) && typeof data[key] !== 'undefined') {
+            options.data.append(key, data[key]);
+          }
+        }
+      }
+
       return axios(options);
     }
   };
