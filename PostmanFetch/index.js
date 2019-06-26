@@ -53,7 +53,7 @@ export default class PostmanFetch {
     if (regex.test(value)) {
       let property = value.match(regex).pop();
       const variable = this.variables[property];
-      return value.replace(regex, variable)
+      return value.replace(regex, variable);
     }
     return value;
   };
@@ -72,7 +72,7 @@ export default class PostmanFetch {
       data = {},
       params = {},
       ...restConfig
-    }
+    } = {}
   ) => {
     const foundRequest = this.findRequestFromKey(key);
     if (foundRequest) {

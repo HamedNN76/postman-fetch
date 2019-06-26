@@ -11,4 +11,8 @@ const { fetch } = new PostmanFetch(sampleJSON, {
 
 fetch('Todo.List todos');
 
+export {
+  PostmanFetch
+};
+
 export default PostmanFetch;
