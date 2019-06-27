@@ -24,9 +24,9 @@ This package provide PostmanFetch class for handle your API requests.
 
 We have to pass two parameters to this class:
 
-- Postman exported JSON collection.
+- Postman exported JSON collection (v2.1).
 - Options:
-    - variables: pass your postman environment variables as a JSON.
+    - variables: pass your postman environment variables as an object.
     - debug: this flag log the important thing like request and params for development.
 
 For example you can make fetch.js file like this:
