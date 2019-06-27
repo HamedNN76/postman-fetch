@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
-    "cross-fetch": "^3.0.4"
+    "cross-fetch": "^3.0.4",
+    "react-native-camera": "^2.11.0"
   }
 }
