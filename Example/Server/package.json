@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server side application to test postman-fetch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "postman-fetch",
+    "fetch",
+    "postman",
+    "axios",
+    "easy-api"
+  ],
+  "author": "AmirTahani, HamedNN",
+  "license": "MIT"
+}
