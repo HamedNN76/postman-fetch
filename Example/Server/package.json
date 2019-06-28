@@ -4,7 +4,8 @@
   "description": "server side application to test postman-fetch",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "keywords": [
     "postman-fetch",
@@ -14,5 +15,11 @@
     "easy-api"
   ],
   "author": "AmirTahani, HamedNN",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/joi": "^15.1.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "uuid": "^3.3.2"
+  }
 }
