@@ -63,3 +63,7 @@ typings/
 .idea/
 
 package-lock.json
+
+*.DS_STORE
+
+yarn.lock
