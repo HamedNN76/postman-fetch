@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { strings } from '../config';
+import strings from '../strings';
 
 export default class PostmanFetch {
 
@@ -125,4 +125,8 @@ export default class PostmanFetch {
     return `${host}/${path}`;
   }
 
+}
+
+export {
+  PostmanFetch
 };

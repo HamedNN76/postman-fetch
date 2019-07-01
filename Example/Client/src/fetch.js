@@ -1,5 +1,5 @@
 import PostmanFetch from 'postman-fetch';
-import * as postmanCollection from '../sample.postman_collection';
+import * as postmanCollection from './sample.postman_collection';
 
 const options = {
   variables: {

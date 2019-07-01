@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "node-sass": "^4.12.0",
-    "postman-fetch": "^1.0.2",
+    "postman-fetch": "^1.0.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
@@ -38,19 +38,5 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-stage-2": "^7.0.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2"
-  },
-  "babel": {
-    "ignore": [
-      "node_modules"
-    ],
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react",
-      "es2016",
-      "@babel/preset-stage-2"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties"
-    ]
   }
 }

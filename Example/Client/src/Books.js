@@ -4,7 +4,7 @@ import 'react-table/react-table.css';
 import { Button, Modal } from "./Components";
 import { fetch } from './fetch';
 
-fetch();
+fetch('zadan');
 
 export default class Books extends Component {
 
