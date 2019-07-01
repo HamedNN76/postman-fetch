@@ -35,6 +35,7 @@ function editBook(req, res) {
                 ...req.body
             };
         }
+        return book;
     });
     fs.writeFileSync('./books.json', JSON.stringify(newList));
     const foundNewBook = newList.find(book => book.id === req.params.id);
