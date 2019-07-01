@@ -1,6 +1,6 @@
 {
   "name": "postman-fetch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A package for fetch from your postman collection easily with name of your request",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/HamedNN76/postman-fetch#readme",
   "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-preset-env": "^1.5.1",
