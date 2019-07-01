@@ -3,10 +3,10 @@ import { strings } from '../config';
 
 export default class PostmanFetch {
 
-  constructor(json, config) {
+  constructor(json, config = {}) {
     this.json = json;
-    this.variables = config.variables;
-    this.debug = config.debug;
+    this.variables = config.variables || {};
+    this.debug = config.debug || false;
   }
 
   setVariables = newVariables => {
