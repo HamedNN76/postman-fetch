@@ -1,5 +1,5 @@
 import axios from 'axios';
-import strings from '../strings';
+import strings from './strings';
 
 export default class PostmanFetch {
 

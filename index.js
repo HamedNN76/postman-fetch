@@ -9,7 +9,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 import axios from 'axios';
-import strings from '../strings';
+import strings from './strings';
 
 var PostmanFetch = function PostmanFetch(json) {
   var _this = this;
