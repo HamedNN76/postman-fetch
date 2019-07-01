@@ -1,4 +1,4 @@
-import * as sampleJSON from './sample.postman_collection.json';
+import * as sampleJSON from './Example/Client/sample.postman_collection.json';
 import PostmanFetch from './PostmanFetch';
 
 const { fetch } = new PostmanFetch(sampleJSON, {
