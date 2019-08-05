@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { Button, Input, Modal } from "./Components";
-import { fetch, setVariables, variables } from './fetch';
+import { fetch, setVariables } from './fetch';
 
 export default class Books extends Component {
 

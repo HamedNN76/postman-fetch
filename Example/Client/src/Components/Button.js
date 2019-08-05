@@ -4,6 +4,7 @@ export default class Button extends Component {
 
   generateStyleFromType = type => {
     switch (type) {
+      default:
       case 'primary':
         return {
           backgroundColor: 'blue'
