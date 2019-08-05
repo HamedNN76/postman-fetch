@@ -4,14 +4,12 @@ import 'react-table/react-table.css';
 import { Button, Modal } from "./Components";
 import { fetch } from './fetch';
 
-fetch('zadan');
-
 export default class Books extends Component {
 
   _modal = null;
 
   getBooks = () => {
-
+    fetch('GetBooks', {data: {}}).then(res => console.log(res, 'res is here'));
   };
 
   addbook = newBook => {
@@ -25,6 +23,10 @@ export default class Books extends Component {
   editBook = editedBook => {
 
   };
+
+  componentDidMount() {
+    this.getBooks();
+  }
 
   render() {
     const data = [
