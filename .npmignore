@@ -71,3 +71,9 @@ package-lock.json
 yarn.lock
 
 example/
+
+*.md
+
+PostmanFetch.js
+
+.babelrc
