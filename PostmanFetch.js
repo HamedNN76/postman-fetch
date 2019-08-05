@@ -77,7 +77,7 @@ export default class PostmanFetch {
     const foundRequest = this.findRequestFromKey(key);
     if (foundRequest) {
       this.showDebugMessage('log', `${JSON.stringify(foundRequest)} ${strings.foundRequest}`);
-      const collectionBodyParams = this.generateObjects(foundRequest.body && foundRequest.body[foundRequest.body.mode]) || {};
+      const collectionBodyParams = foundRequest.body && foundRequest.body[foundRequest.body.mode] || {};
       const collectionQueryParams = foundRequest.url.query || {};
 
       if (data) {
@@ -121,7 +121,7 @@ export default class PostmanFetch {
 
   urlGenerator = request => {
     const host = this.replaceVariablesInString(request.url.host[0]);
-    const path = request.url.path.join('/');
+    const path = request.url.path.map(item => this.replaceVariablesInString(item)).join('/');
     return `${host}/${path}`;
   }
 

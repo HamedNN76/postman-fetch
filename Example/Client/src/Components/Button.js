@@ -11,6 +11,10 @@ export default class Button extends Component {
       case 'secondary':
         return {
           backgroundColor: 'tomato'
+        };
+      case 'danger':
+        return {
+          backgroundColor: 'red'
         }
     }
   };

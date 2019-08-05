@@ -1,57 +1,103 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import { Button, Modal } from "./Components";
-import { fetch } from './fetch';
+import { Button, Input, Modal } from "./Components";
+import { fetch, setVariables, variables } from './fetch';
 
 export default class Books extends Component {
 
-  _modal = null;
-
-  getBooks = () => {
-    fetch('exampleBooks.Get Books', {data: {}}).then(res => console.log(res, 'res is here'));
+  state = {
+    loading: false,
+    data: [],
+    name: '',
+    author: '',
+    pages: '',
+    isAdding: false,
+    editingId: null
   };
 
-  addbook = newBook => {
+  handleChange = e => this.setState({
+    [e.target.name]: e.target.value
+  });
 
+  getBooks = async () => {
+    const { data } = await fetch('exampleBooks.Get Books');
+    await this.setState({ data });
   };
 
-  removeBook = bookId => {
-
+  showAddModal = () => {
+    this._modal.show();
+    this.setState({
+      name: '',
+      author: '',
+      pages: '',
+      isAdding: true
+    });
   };
 
-  editBook = editedBook => {
+  showEditModal = ({ name, author, pages, id }) => {
+    this.setState({
+      name,
+      author,
+      pages,
+      isAdding: false,
+      editingId: id
+    }, () => this._modal.show());
+  };
 
+  addBook = async () => {
+    const { name, author, pages } = this.state;
+    const newBook = { name, author, pages };
+
+    try {
+      const { data } = await fetch('createBook', { data: newBook });
+      await this.setState({
+        name: '',
+        author: '',
+        pages: '',
+        data,
+        isAdding: false
+      });
+      await this._modal.hide();
+    } catch (e) {
+      alert(e);
+    }
+  };
+
+  removeBook = async bookId => {
+    await setVariables({ bookId });
+    try {
+      await fetch('deleteBook');
+      await this.setState({
+        data: this.state.data.filter(item => item.id !== bookId)
+      })
+    } catch (e) {
+      alert(e);
+    }
+  };
+
+  editBook = async () => {
+    const { name, author, pages, editingId } = this.state;
+    const editedBook = { name, author, pages };
+
+    try {
+      await setVariables({ bookId: editingId });
+      const { data } = await fetch('editBook', { data: editedBook });
+      await this.setState({
+        data: this.state.data.map(item => item.id === editingId ? data : item)
+      });
+      await this._modal.hide();
+    } catch (e) {
+      alert(e);
+    }
   };
 
   componentDidMount() {
-    this.getBooks();
+    return this.getBooks();
   }
 
   render() {
-    const data = [
-      {
-        author: 'Zadan',
-        name: 'name',
-        pages: 1000
-      },
-      {
-        author: 'Zadan',
-        name: 'name',
-        pages: 1000
-      },
-      {
-        author: 'Zadan',
-        name: 'name',
-        pages: 1000
-      },
-      {
-        author: 'Zadan',
-        name: 'name',
-        pages: 1000
-      }
-    ];
-
+    const { data, loading, author, name, pages, isAdding } = this.state;
     const columns = [
       {
         Header: 'Name',
@@ -68,21 +114,40 @@ export default class Books extends Component {
       {
         Header: 'Operation',
         accessor: '',
-        Cell: row => <Button type="secondary" onClick={() => console.log(row.original.id)}>Edit book</Button>
+        Cell: row => (
+          <div>
+            <Button type="secondary" onClick={() => this.showEditModal(row.original)}>Edit book</Button>
+            <Button type="danger" onClick={() => this.removeBook(row.original.id)}>Remove book</Button>
+          </div>
+        )
       }
     ];
 
     return (
       <div>
-        <Button type="primary">Add Book</Button>
-        <ReactTable
-          data={data}
-          columns={columns}
-          defaultPageSize={10}
-        />
-        <Modal ref={ref => this._modal = ref}>
-
-        </Modal>
+        {
+          loading ?
+            '...loading...' :
+            <>
+              <div className="text-center">
+                <Button type="primary" onClick={this.showAddModal}>Add Book</Button>
+              </div>
+              <ReactTable
+                data={data}
+                columns={columns}
+                defaultPageSize={10}
+              />
+              <Modal ref={ref => this._modal = ref}>
+                <form onSubmit={e => e.preventDefault()}>
+                  <Input onChange={this.handleChange} value={name} name="name" type="text" title="Name: "/>
+                  <Input onChange={this.handleChange} value={author} name="author" type="text" title="Author: "/>
+                  <Input onChange={this.handleChange} value={pages} name="pages" type="number" title="Pages: "/>
+                  {isAdding ? <Button type="primary" onClick={this.addBook}>Add Book</Button> : null}
+                  {!isAdding ? <Button type="primary" onClick={this.editBook}>Edit Book</Button> : null}
+                </form>
+              </Modal>
+            </>
+        }
       </div>
     );
   }

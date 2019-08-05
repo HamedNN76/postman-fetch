@@ -9,6 +9,10 @@ export default class Modal extends Component {
 
   setModalVisibility = visibility => this.setState({ show: visibility });
 
+  show = () => this.setModalVisibility(true);
+
+  hide = () => this.setModalVisibility(false);
+
   render() {
     const { show } = this.state;
     const { children } = this.props;
