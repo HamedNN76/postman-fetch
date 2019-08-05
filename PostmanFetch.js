@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { strings } from '../config';
+import strings from './strings';
 
 export default class PostmanFetch {
 
-  constructor(json, config) {
+  constructor(json, config = {}) {
     this.json = json;
-    this.variables = config.variables;
-    this.debug = config.debug;
+    this.variables = config.variables || {};
+    this.debug = config.debug || false;
   }
 
   setVariables = newVariables => {
@@ -125,4 +125,8 @@ export default class PostmanFetch {
     return `${host}/${path}`;
   }
 
+}
+
+export {
+  PostmanFetch
 };
