@@ -9,7 +9,7 @@ export default class Books extends Component {
   _modal = null;
 
   getBooks = () => {
-    fetch('GetBooks', {data: {}}).then(res => console.log(res, 'res is here'));
+    fetch('exampleBooks.Get Books', {data: {}}).then(res => console.log(res, 'res is here'));
   };
 
   addbook = newBook => {

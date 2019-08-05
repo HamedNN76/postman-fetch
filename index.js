@@ -39,9 +39,11 @@ var PostmanFetch = function PostmanFetch(json) {
 
     var foundRequest;
     var startedPoint = _this.json.item;
+    console.log(startedPoint, 'started point');
 
     for (var i = 0; i < keys.length; i++) {
       var foundItem = findRequest(startedPoint, keys[i]);
+      console.log(foundItem, 'foundItem');
 
       if (foundItem) {
         if (foundItem.request) {
@@ -83,7 +85,9 @@ var PostmanFetch = function PostmanFetch(json) {
     return generatedItems;
   };
 
-  this.fetch = function (key, _ref) {
+  this.fetch = function (key) {
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
     var _ref$data = _ref.data,
         data = _ref$data === void 0 ? {} : _ref$data,
         _ref$params = _ref.params,
@@ -95,7 +99,7 @@ var PostmanFetch = function PostmanFetch(json) {
     if (foundRequest) {
       _this.showDebugMessage('log', "".concat(JSON.stringify(foundRequest), " ").concat(strings.foundRequest));
 
-      var collectionBodyParams = _this.generateObjects(foundRequest.body[foundRequest.body.mode]) || {};
+      var collectionBodyParams = _this.generateObjects(foundRequest.body && foundRequest.body[foundRequest.body.mode]) || {};
       var collectionQueryParams = foundRequest.url.query || {};
 
       if (data) {
@@ -141,7 +145,8 @@ var PostmanFetch = function PostmanFetch(json) {
     return "".concat(host, "/").concat(path);
   };
 
-  this.json = json;
+  console.log(json, 'this.json is here');
+  this.json = json["default"];
   this.variables = config.variables || {};
   this.debug = config.debug || false;
 };

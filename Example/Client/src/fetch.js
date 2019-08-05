@@ -1,9 +1,9 @@
 import PostmanFetch from 'postman-fetch';
-import * as postmanCollection from './sample.postman_collection';
+import * as postmanCollection from './sample.postman_collection.json';
 
 const options = {
   variables: {
-    baseUrl: 'http://localhost:5000'
+    url: 'http://localhost:5000'
   },
   debug: true
 };

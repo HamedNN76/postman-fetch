@@ -4,7 +4,7 @@ import strings from './strings';
 export default class PostmanFetch {
 
   constructor(json, config = {}) {
-    this.json = json;
+    this.json = json.default;
     this.variables = config.variables || {};
     this.debug = config.debug || false;
   }
@@ -77,7 +77,7 @@ export default class PostmanFetch {
     const foundRequest = this.findRequestFromKey(key);
     if (foundRequest) {
       this.showDebugMessage('log', `${JSON.stringify(foundRequest)} ${strings.foundRequest}`);
-      const collectionBodyParams = this.generateObjects(foundRequest.body[foundRequest.body.mode]) || {};
+      const collectionBodyParams = this.generateObjects(foundRequest.body && foundRequest.body[foundRequest.body.mode]) || {};
       const collectionQueryParams = foundRequest.url.query || {};
 
       if (data) {

@@ -2,9 +2,12 @@ const express = require('express');
 const controller = require('./bookController');
 const setHeaders = require('./setHeaders');
 const { validateAddBook, validateEditBook } = require('./booksValidator');
+var cors = require('cors');
 
 const app = express();
 app.listen(5000);
+
+app.use(cors());
 
 app.use(express.json(), setHeaders);
 
