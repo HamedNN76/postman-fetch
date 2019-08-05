@@ -72,7 +72,7 @@ yarn.lock
 
 example/
 
-*.md
+README.md
 
 PostmanFetch.js
 
