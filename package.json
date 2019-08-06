@@ -4,7 +4,6 @@
   "description": "A package for fetch from your postman collection easily with name of your request",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
     "build": "babel PostmanFetch.js --out-file index.js"
   },
   "repository": {
@@ -12,7 +11,7 @@
     "url": "git+https://github.com/HamedNN76/postman-fetch.git"
   },
   "author": "hamednn76",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/HamedNN76/postman-fetch/issues"
   },
@@ -28,7 +27,14 @@
     "babel-plugin-dynamic-import-node": "^2.3.0"
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "react-native-camera": "^2.11.0"
-  }
+    "axios": "^0.19.0"
+  },
+  "keywords": [
+    "postman",
+    "fetch",
+    "postman-fetch",
+    "API call",
+    "node",
+    "javascript"
+  ]
 }
