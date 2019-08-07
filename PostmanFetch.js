@@ -6,6 +6,7 @@ export default class PostmanFetch {
   constructor(json, config = {}) {
     this.json = json.default;
     this.variables = config.variables || {};
+    this.headers = config.headers || {};
     this.debug = config.debug || false;
   }
 
@@ -93,7 +94,10 @@ export default class PostmanFetch {
         );
       }
 
-      const headers = this.generateObjects(foundRequest.header, 'headers');
+      const headers = {
+        ...this.generateObjects(foundRequest.header, 'headers'),
+        ...this.headers
+      };
       const url = this.urlGenerator(foundRequest);
       let options = {
         url,
