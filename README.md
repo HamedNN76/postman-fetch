@@ -27,6 +27,7 @@ We have to pass two parameters to this class:
 - Postman exported JSON collection (v2.1).
 - Options:
     - variables: pass your postman environment variables as an object.
+    - headers: use global headers in all requests.
     - debug: this flag log the important thing like request and params for development.
 
 For example you can make fetch.js file like this:
@@ -41,6 +42,10 @@ const options = {
         baseURL: 'https://api.com/v1',
         adminToken: 'A jwt token',
         userToken: 'A jwt token',
+        ...
+    },
+    headers: {
+        "Content-Type": "application/json",
         ...
     },
     debug: true //default false

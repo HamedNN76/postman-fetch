@@ -1,10 +1,11 @@
 {
   "name": "postman-fetch",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "A package for fetch from your postman collection easily with name of your request",
   "main": "index.js",
   "scripts": {
-    "build": "babel PostmanFetch.js --out-file index.js"
+    "build": "babel PostmanFetch.js --out-file index.js",
+    "publish": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
