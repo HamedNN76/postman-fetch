@@ -108,7 +108,7 @@ var PostmanFetch = function PostmanFetch(json) {
         _this.showDebugMessage('log', strings.logRequestAndFetchParams(collectionQueryParams, params, 'query params'));
       }
 
-      var headers = _this.generateObjects(foundRequest.header, 'headers');
+      var headers = _objectSpread({}, _this.generateObjects(foundRequest.header, 'headers'), _this.headers);
 
       var url = _this.urlGenerator(foundRequest);
 
@@ -147,6 +147,7 @@ var PostmanFetch = function PostmanFetch(json) {
 
   this.json = json["default"];
   this.variables = config.variables || {};
+  this.headers = config.headers || {};
   this.debug = config.debug || false;
 };
 
