@@ -1,6 +1,6 @@
 {
   "name": "postman-fetch",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A package for fetch from your postman collection easily with name of your request",
   "main": "index.js",
   "scripts": {
