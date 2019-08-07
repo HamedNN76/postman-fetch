@@ -102,9 +102,9 @@ export default class PostmanFetch {
       let options = {
         url,
         method: foundRequest.method,
-        headers,
         data,
         params,
+        headers,
         ...restConfig
       };
       this.showDebugMessage('log', strings.logRequestOptions(options));
