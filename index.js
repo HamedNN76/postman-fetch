@@ -115,9 +115,9 @@ var PostmanFetch = function PostmanFetch(json) {
       var options = _objectSpread({
         url: url,
         method: foundRequest.method,
-        headers: headers,
         data: data,
-        params: params
+        params: params,
+        headers: headers
       }, restConfig);
 
       _this.showDebugMessage('log', strings.logRequestOptions(options));
