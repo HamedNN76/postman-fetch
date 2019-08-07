@@ -78,7 +78,9 @@ var PostmanFetch = function PostmanFetch(json) {
     var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var generatedItems = {};
     items.forEach(function (item) {
-      generatedItems[item.key] = _this.replaceVariablesInString(item.value);
+      if (!!item.value) {
+        generatedItems[item.key] = _this.replaceVariablesInString(item.value);
+      }
     });
     return generatedItems;
   };

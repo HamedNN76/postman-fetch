@@ -62,7 +62,9 @@ export default class PostmanFetch {
   generateObjects = (items = []) => {
     const generatedItems = {};
     items.forEach(item => {
-      generatedItems[item.key] = this.replaceVariablesInString(item.value);
+      if (!!item.value) {
+        generatedItems[item.key] = this.replaceVariablesInString(item.value);
+      }
     });
     return generatedItems;
   };
