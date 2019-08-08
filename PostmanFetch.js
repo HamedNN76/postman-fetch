@@ -54,7 +54,11 @@ export default class PostmanFetch {
     if (regex.test(value)) {
       let property = value.match(regex).pop();
       const variable = this.variables[property];
-      return value.replace(regex, variable);
+      if (variable) {
+        return value.replace(regex, variable);
+      } else {
+        return null;
+      }
     }
     return value;
   };
@@ -63,7 +67,10 @@ export default class PostmanFetch {
     const generatedItems = {};
     items.forEach(item => {
       if (!!item.value) {
-        generatedItems[item.key] = this.replaceVariablesInString(item.value);
+        const value = this.replaceVariablesInString(item.value);
+        if (value) {
+          generatedItems[item.key] = value
+        }
       }
     });
     return generatedItems;

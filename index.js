@@ -68,7 +68,12 @@ var PostmanFetch = function PostmanFetch(json) {
     if (regex.test(value)) {
       var property = value.match(regex).pop();
       var variable = _this.variables[property];
-      return value.replace(regex, variable);
+
+      if (variable) {
+        return value.replace(regex, variable);
+      } else {
+        return null;
+      }
     }
 
     return value;
@@ -79,7 +84,11 @@ var PostmanFetch = function PostmanFetch(json) {
     var generatedItems = {};
     items.forEach(function (item) {
       if (!!item.value) {
-        generatedItems[item.key] = _this.replaceVariablesInString(item.value);
+        var value = _this.replaceVariablesInString(item.value);
+
+        if (value) {
+          generatedItems[item.key] = value;
+        }
       }
     });
     return generatedItems;
