@@ -1,3 +1,20 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PostmanFetch = exports["default"] = undefined;
+
+var _axios = require("axios");
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _strings = require("./strings");
+
+var _strings2 = _interopRequireDefault(_strings);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
@@ -7,9 +24,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-import axios from 'axios';
-import strings from './strings';
 
 var PostmanFetch = function PostmanFetch(json) {
   var _this = this;
@@ -58,7 +72,7 @@ var PostmanFetch = function PostmanFetch(json) {
     if (foundRequest) {
       return foundRequest;
     } else {
-      _this.showDebugMessage('debug', strings.noRequestFound);
+      _this.showDebugMessage('debug', _strings2["default"].noRequestFound);
     }
   };
 
@@ -106,17 +120,17 @@ var PostmanFetch = function PostmanFetch(json) {
     var foundRequest = _this.findRequestFromKey(key);
 
     if (foundRequest) {
-      _this.showDebugMessage('log', "".concat(JSON.stringify(foundRequest), " ").concat(strings.foundRequest));
+      _this.showDebugMessage('log', "".concat(JSON.stringify(foundRequest), " ").concat(_strings2["default"].foundRequest));
 
       var collectionBodyParams = foundRequest.body && foundRequest.body[foundRequest.body.mode] || {};
       var collectionQueryParams = foundRequest.url.query || {};
 
       if (data) {
-        _this.showDebugMessage('log', strings.logRequestAndFetchParams(collectionBodyParams, data, 'body params'));
+        _this.showDebugMessage('log', _strings2["default"].logRequestAndFetchParams(collectionBodyParams, data, 'body params'));
       }
 
       if (params) {
-        _this.showDebugMessage('log', strings.logRequestAndFetchParams(collectionQueryParams, params, 'query params'));
+        _this.showDebugMessage('log', _strings2["default"].logRequestAndFetchParams(collectionQueryParams, params, 'query params'));
       }
 
       var headers = _objectSpread({}, _this.generateObjects(foundRequest.header, 'headers'), _this.headers);
@@ -131,7 +145,7 @@ var PostmanFetch = function PostmanFetch(json) {
         headers: headers
       }, restConfig);
 
-      _this.showDebugMessage('log', strings.logRequestOptions(options));
+      _this.showDebugMessage('log', _strings2["default"].logRequestOptions(options));
 
       if (options.type === 'formdata') {
         options.data = new FormData();
@@ -143,7 +157,7 @@ var PostmanFetch = function PostmanFetch(json) {
         }
       }
 
-      return axios(options);
+      return (0, _axios2["default"])(options);
     }
   };
 
@@ -162,5 +176,5 @@ var PostmanFetch = function PostmanFetch(json) {
   this.debug = config.debug || false;
 };
 
-export { PostmanFetch as default };
-export { PostmanFetch };
+exports["default"] = PostmanFetch;
+exports.PostmanFetch = PostmanFetch;
