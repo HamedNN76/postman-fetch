@@ -71,6 +71,7 @@ package-lock.json
 yarn.lock
 
 example/
+src/
 
 README.md
 

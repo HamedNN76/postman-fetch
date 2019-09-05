@@ -4,7 +4,7 @@
   "description": "A package for fetch from your postman collection easily with name of your request",
   "main": "index.js",
   "scripts": {
-    "build": "babel PostmanFetch.js --out-file index.js"
+    "build": "babel src/ --out-dir build"
   },
   "repository": {
     "type": "git",
