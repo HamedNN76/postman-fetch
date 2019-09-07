@@ -1,7 +1,7 @@
 import axios from 'axios';
 import strings from './strings';
 
-export default class PostmanFetch {
+class PostmanFetch {
 
   constructor(json, config = {}) {
     this.json = json.default;
@@ -140,6 +140,8 @@ export default class PostmanFetch {
 
 }
 
-export {
+export default PostmanFetch;
+
+module.exports = {
   PostmanFetch
 };
