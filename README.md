@@ -33,8 +33,6 @@ We have to pass two parameters to this class:
 For example you can make fetch.js file like this:
 ```
 import PostmanFetch from 'postman-fetch';
-//or
-import { PostmanFetch } from 'postman-fetch';
 import * as postmanCollection from 'path/to/postmanCollection';
 
 const options = {

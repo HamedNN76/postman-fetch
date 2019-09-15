@@ -141,7 +141,3 @@ class PostmanFetch {
 }
 
 export default PostmanFetch;
-
-module.exports = {
-  PostmanFetch
-};
