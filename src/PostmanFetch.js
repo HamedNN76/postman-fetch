@@ -81,6 +81,7 @@ class PostmanFetch {
     {
       data = {},
       params = {},
+      headers = {},
       ...restConfig
     } = {}
   ) => {
@@ -105,7 +106,8 @@ class PostmanFetch {
 
       const headers = {
         ...this.generateObjects(foundRequest.header, 'headers'),
-        ...this.headers
+        ...this.headers,
+        ...headers,
       };
       const url = this.urlGenerator(foundRequest);
       let options = {
