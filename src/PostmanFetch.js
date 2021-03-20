@@ -79,9 +79,9 @@ class PostmanFetch {
   fetch = (
     key,
     {
-      data = {},
-      params = {},
-      headers = {},
+      data,
+      params,
+      headers,
       ...restConfig
     } = {}
   ) => {
