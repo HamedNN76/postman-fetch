@@ -70,4 +70,6 @@ package-lock.json
 
 .DS_Store
 
+Example/.DS_Store
+
 yarn.lock
